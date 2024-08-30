@@ -1,0 +1,40 @@
+.results-page-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-color: #f9f9f9;
+    text-align: center;
+    padding: 20px;
+}
+
+.results-content {
+    margin-top: 50px;
+    flex: 1;
+}
+
+.success-badge {
+    width: 150px;
+    height: auto;
+    margin-bottom: 20px;
+}
+
+.results-title {
+    font-size: 2.5rem;
+    color: #4caf50;
+    margin-bottom: 10px;
+}
+
+.results-score {
+    font-size: 1.5rem;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.results-message {
+    font-size: 1.2rem;
+    color: #666;
+}
+
+footer {
+    margin-top: auto;
+}

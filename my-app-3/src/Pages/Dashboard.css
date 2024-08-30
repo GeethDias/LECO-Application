@@ -1,0 +1,52 @@
+/* CSS for the Dashboard */
+.Modules {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding: 20px;
+}
+
+.Modules > div {
+    margin: 15px;
+}
+
+/* Media query for screens wider than 1200px */
+@media (min-width: 1200px) {
+    .Modules > div {
+        flex: 0 1 22%; /* Each card takes up 22% of the row, fitting 4 per row */
+    }
+}
+
+/* Media query for screens between 768px and 1200px */
+@media (min-width: 768px) and (max-width: 1199px) {
+    .Modules > div {
+        flex: 0 1 45%; /* Each card takes up 45% of the row, fitting 2 per row */
+    }
+}
+
+/* Media query for screens smaller than 768px */
+@media (max-width: 767px) {
+    .Modules > div {
+        flex: 0 1 100%; /* Each card takes up 100% of the row, fitting 1 per row */
+    }
+}
+
+/* Optional: Add some padding to the card bodies for better appearance on smaller screens */
+.Card.Body {
+    padding: 10px;
+}
+
+/* Optional: Make the card images responsive */
+.Card.Img {
+    width: 100%;
+    height: auto;
+}
+
+.no-underline {
+    text-decoration: none;
+    color: inherit; /* Optional: Inherit the text color from its parent */
+}
+
+.no-underline:hover {
+    text-decoration: underline; /* Optional: Add underline on hover for accessibility */
+}
