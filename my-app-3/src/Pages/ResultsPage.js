@@ -4,6 +4,7 @@ import MyNavbar from '../Components/Navbar';
 import Footer from '../Components/Footer.js';
 import './ResultsPage.css';
 
+//implementation of the result function
 const ResultsPage = () => {
     const location = useLocation();
     const { score, totalQuestions } = location.state;
