@@ -13,6 +13,7 @@ const PasswordPolicy = () => {
     useEffect(() => {
 
         const moduleId = "PasswordModule";
+        
         //fetching password module questions
         fetch(`/api/questions?moduleId=${moduleId}`)
             .then(response => response.json())
