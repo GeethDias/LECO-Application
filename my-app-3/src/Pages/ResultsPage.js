@@ -24,7 +24,7 @@ const ResultsPage = () => {
         imageSrc = "/successfull-image.png";
     } else if (percentageScore >= 50) {
         resultMessage = "Good effort! You passed!";
-        imageSrc = "/leco-logo.png";
+        imageSrc = "/good-score.jpg";
     } else {
         resultMessage = "Don't worry, you can try again!";
         imageSrc = "/leco-logo.png";
