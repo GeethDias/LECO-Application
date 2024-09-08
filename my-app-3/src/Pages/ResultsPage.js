@@ -27,7 +27,7 @@ const ResultsPage = () => {
         imageSrc = "/good-score.jpg";
     } else {
         resultMessage = "Don't worry, you can try again!";
-        imageSrc = "/leco-logo.png";
+        imageSrc = "/try-again.png";
     }
 
     return (
