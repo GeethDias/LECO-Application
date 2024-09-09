@@ -12,11 +12,13 @@ const ResultsPage = () => {
     // Define thresholds for different messages and images
     let resultMessage = "";
     let imageSrc = "";
+    let resultTitle = "Congratulations";
     
     // Change the message and image based on the score percentage
     const percentageScore = (score / totalQuestions) * 100;
 
     if (percentageScore === 100) {
+        
         resultMessage = "Excellent! You got a perfect score!";
         imageSrc = "/successfull-image.png";
     } else if (percentageScore >= 75) {
@@ -26,6 +28,7 @@ const ResultsPage = () => {
         resultMessage = "Good effort! You passed!";
         imageSrc = "/good-score.jpg";
     } else {
+        resultTitle = "Padam karapan"
         resultMessage = "Don't worry, you can try again!";
         imageSrc = "/try-again.png";
     }
@@ -39,7 +42,8 @@ const ResultsPage = () => {
                     alt="Result Badge"
                     className="success-badge"
                 />
-                <h1 className="results-title">Congratulations!</h1>
+                
+                <h1 className="results-title">{resultTitle}!</h1>
                 <p className="results-score">{`You scored ${score} out of ${totalQuestions}`}</p>
                 <p className="results-message">{resultMessage}</p>
             </div>
