@@ -1,0 +1,68 @@
+/* Style the main container of the registration form */
+.registration-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Style the form heading */
+.registration-container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+/* Style the form labels */
+.registration-container label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 1rem;
+    color: #555;
+}
+
+/* Style the form input fields */
+.registration-container input,
+.registration-container select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+    background-color: #fff;
+}
+
+/* Ensure select fields look consistent */
+.registration-container select {
+    appearance: none;
+}
+
+/* Style the form button */
+.registration-container button {
+    width: 100%;
+    padding: 10px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1.1rem;
+    transition: background-color 0.3s ease;
+}
+
+/* Button hover effect */
+.registration-container button:hover {
+    background-color: #218838;
+}
+
+/* Style error messages (if applicable) */
+.registration-container .error-message {
+    color: red;
+    margin-top: -10px;
+    margin-bottom: 15px;
+    font-size: 0.9rem;
+    display: none; /* Example if you're using JS to toggle visibility */
+}

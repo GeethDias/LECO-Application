@@ -67,7 +67,7 @@ const modules = [
 const Dashboard = () => {
     return (
         <div>
-            <MyNavbar />
+            
             <div className='Modules'>
                 {modules.map((module, index) => (
                     <div key={index}>

@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import MyNavbar from '../../Components/Navbar';
 import { Container, Form, Row, Col, Button } from 'react-bootstrap';
 
 const AddQuestion = () => {
@@ -79,7 +78,7 @@ const AddQuestion = () => {
 
     return (
         <div>
-            <MyNavbar />
+            
             <Container>
                 <h2>Add a New Question</h2>
                 <Form onSubmit={handleSubmit}>
