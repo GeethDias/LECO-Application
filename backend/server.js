@@ -21,7 +21,10 @@ app.use((req, res, next) => {
     console.log(req.path, req.method)
     next()
 })
- 
+
+// API Routes
+app.use('/api', userRoutes);  // User routes for managing users
+
 app.use('/api/questions', questionsRouter)
 
 // Middleware for authentication (newly added)

@@ -6,7 +6,16 @@ const userSchema = new mongoose.Schema({
     email: { type: String, required: true, unique: true },
     department: { type: String, required: true },
     password: { type: String, required: true },
-    role: { type: String, enum: ['NormalUser', 'AdminUser'], default: 'NormalUser' }
+    role: { type: String, enum: ['NormalUser', 'AdminUser'], default: 'NormalUser' },
+    failedLoginAttempts: {
+        type: Number,
+        default: 0,
+    },
+    isLocked: { type: Boolean, default: false },
+    lockUntil: {
+        type: Date,
+        default: null,
+    }
 });
 
 const User = mongoose.model('User', userSchema);

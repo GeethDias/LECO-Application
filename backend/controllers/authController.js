@@ -6,7 +6,7 @@ const { body, validationResult } = require('express-validator');
 // Register User
 const registerUser = async (req, res) => {
     const { fullName, employmentId, email, department, password } = req.body;
-    
+
     // Check for existing user
     const existingUser = await User.findOne({ email });
     if (existingUser) return res.status(400).json({ error: 'User already exists' });
@@ -37,17 +37,64 @@ const registerUser = async (req, res) => {
 const loginUser = async (req, res) => {
     const { email, password } = req.body;
 
-    // Check for existing user
+    // Check if user exists
     const user = await User.findOne({ email });
     if (!user) return res.status(400).json({ error: 'Invalid credentials' });
 
+    // Check if user is locked
+    if (user.lockUntil && user.lockUntil > Date.now()) {
+        return res.status(403).json({ error: `Account locked. Try again after ${new Date(user.lockUntil).toLocaleTimeString()}` });
+    }
+
     // Check password
     const isMatch = await bcrypt.compare(password, user.password);
-    if (!isMatch) return res.status(400).json({ error: 'Invalid credentials' });
+    if (!isMatch) {
+        // Increment failed login attempts
+        user.failedLoginAttempts += 1;
+
+        // Lock account if 3 failed attempts are reached
+        if (user.failedLoginAttempts >= 3) {
+            user.lockUntil = Date.now() + 20 * 60 * 1000; // Lock for 20 minutes
+            user.failedLoginAttempts = 0;  // Reset failed attempts after locking
+        }
+
+        await user.save();
+        return res.status(400).json({ error: 'Invalid credentials' });
+    }
+
+    // Reset failed login attempts and lockUntil if login is successful
+    user.failedLoginAttempts = 0;
+    user.lockUntil = null;
+    await user.save();
 
     // Create and send token
     const token = jwt.sign({ id: user._id, role: user.role }, process.env.JWT_SECRET, { expiresIn: '1h' });
-    res.status(200).json({ token, role: user.role, userid:user._id });
+    res.status(200).json({ token, role: user.role, userid: user._id });
+
 };
 
-module.exports = { registerUser, loginUser };
+// Unlock User
+const unlockUser = async (req, res) => {
+    try {
+        const userId = req.params.id;
+
+        // Find the user and unlock their account
+        const user = await User.findById(userId);
+        if (!user) {
+            return res.status(404).json({ error: 'User not found' });
+        }
+
+        // Reset lock and failed login attempts
+        user.isLocked = false;
+        user.lockUntil = null;
+        user.failedLoginAttempts = 0;
+
+        await user.save();
+
+        res.status(200).json({ message: 'User unlocked successfully' });
+    } catch (error) {
+        res.status(500).json({ error: 'Server error' });
+    }
+};
+
+module.exports = { registerUser,loginUser,unlockUser };

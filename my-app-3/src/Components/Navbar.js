@@ -29,7 +29,7 @@ const MyNavbar = ({ user, setUser }) => {
             <Container>
                 <Navbar.Brand as={Link} to="/">
                     <img
-                        src={`/leco-logo.png`}  // Replace with the path to your logo image
+                        src={`/leco-logo-updated.png`}  // Replace with the path to your logo image
                         width="120"
                         height="50"
                         className="d-inline-block align-top"

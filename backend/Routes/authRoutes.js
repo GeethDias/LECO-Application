@@ -1,5 +1,5 @@
 const express = require('express');
-const { registerUser, loginUser } = require('../controllers/authController');
+const { registerUser, loginUser, unlockUser } = require('../controllers/authController');
 const { body } = require('express-validator');
 const router = express.Router();
 
@@ -15,5 +15,8 @@ router.post(
 
 // Login Route
 router.post('/login', loginUser);
+
+// Unlock User Route
+router.patch('/unlock/:id', unlockUser);
 
 module.exports = router;

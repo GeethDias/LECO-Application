@@ -13,7 +13,12 @@ const AddQuestion = () => {
         'PasswordModule',
         'BYODPolicyModule',
         'RemoteAccessModule',
-        'InternetUsageModule'
+        'InternetUsageModule',
+        "SecureSoftwareModule",
+        "DataHandlingAndStorageModule",
+        "AccessControlIdentityManagement",
+        "PersonalDataSecurityModule",
+        "SecureOnlinePaymentsModule"
     ];
 
     // Handle changing the number of options

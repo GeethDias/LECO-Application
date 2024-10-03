@@ -1,5 +1,5 @@
 import './App.css';
-import React, { useState, useEffect  } from 'react';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import MyProfileView from './Pages/MyProfileView';
 import NotFound from './Pages/NotFound';
@@ -20,66 +20,75 @@ import ContactUs from './Pages/ContactUs';
 import ITDepartment from './Pages/it_department_modules';
 import HRDepartment from './Pages/hr_department_modules';
 import FINANCEDepartment from './Pages/finance_department_modules';
+import ManageUsers from './Pages/Admin/ManageUsers';
 
 
 function App() {
   const [user, setUser] = useState(null); // Initially null
-    const [loading, setLoading] = useState(true); // Loading state
+  const [loading, setLoading] = useState(true); // Loading state
 
-    useEffect(() => {
-      const checkUser = () => {
-        const token = localStorage.getItem('token');
-        const role = localStorage.getItem('role');
-        const id = localStorage.getItem('id');
-        if (token && role && id) {
-          setUser({ token, role, id });
-        } else {
-          setUser(null);
-        }
-        setLoading(false);
-      };
-  
-      // Check the user on page load
-      checkUser();
-  
-      // Add event listener for changes in localStorage
-      window.addEventListener('storage', checkUser);
-  
-      return () => {
-        window.removeEventListener('storage', checkUser);
-      };
-    }, []);
-  
+  useEffect(() => {
+    const checkUser = () => {
+      const token = localStorage.getItem('token');
+      const role = localStorage.getItem('role');
+      const id = localStorage.getItem('id');
+      if (token && role && id) {
+        setUser({ token, role, id });
+      } else {
+        setUser(null);
+      }
+      setLoading(false);
+    };
 
-    if (loading) {
-        return <div>Loading...</div>; // Optional: display a loading spinner
-    }
-    
+    // Check the user on page load
+    checkUser();
+
+    // Add event listener for changes in localStorage
+    window.addEventListener('storage', checkUser);
+
+    return () => {
+      window.removeEventListener('storage', checkUser);
+    };
+  }, []);
+
+
+  if (loading) {
+    return <div>Loading...</div>; // Optional: display a loading spinner
+  }
+
   return (
-    
+
     <Router>
       <div>
-      <MyNavbar user={user} setUser={setUser} />
+        <MyNavbar user={user} setUser={setUser} />
         <Routes>
-          <Route path="/" element={<LandingPage />} />  
-          <Route path="/login" element={<Login />} /> 
+          <Route path="/" element={<LandingPage />} />
+          <Route path="/login" element={<Login />} />
           {/*Newly added for select departments*/}
-          <Route path="/Select-Department" element={<SelectDepartment/>} /> 
-          <Route path="/Select-Department/IT-Department" element={<ITDepartment/>} />
-          <Route path="/Select-Department/HR-Department" element={<HRDepartment/>} />
-          <Route path="Select-Department/Finance-Department" element={<FINANCEDepartment/>} />
-          <Route path="/ContactUs" element={<ContactUs/>} />      
-          <Route path="/MyProfileView" element={<MyProfileView user={user}/>} />
-          <Route path='/ReportIncident' element={<ReportIncident />} />          
+          <Route path="/Select-Department" element={<SelectDepartment />} />
+          <Route path="/Select-Department/IT-Department" element={<ITDepartment />} />
+          <Route path="/Select-Department/HR-Department" element={<HRDepartment />} />
+          <Route path="Select-Department/Finance-Department" element={<FINANCEDepartment />} />
+          <Route path="/ContactUs" element={<ContactUs />} />
+          <Route path="/MyProfileView" element={<MyProfileView user={user} />} />
+          <Route path='/ReportIncident' element={<ReportIncident />} />
           <Route path="/ResultsPage" element={<ResultsPage />} />
-          <Route 
-                        path="/admin/AddQuestions" 
-                        element={
-                            <ProtectedRoute user={user} requiredRole="AdminUser">
-                                <AdminQuestionForm />
-                            </ProtectedRoute>
-                        } 
-                    />
+          <Route
+            path="/admin/AddQuestions"
+            element={
+              <ProtectedRoute user={user} requiredRole="AdminUser">
+                <AdminQuestionForm />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/admin/manage-users"
+            element={
+              <ProtectedRoute user={user} requiredRole="AdminUser">
+                <ManageUsers />
+              </ProtectedRoute>
+            }
+          />
           <Route path="/module/:moduleId" element={<ModuleQuiz />} />
           <Route path="/register" element={<Register />} />
           <Route path="/dashboard" element={<Dashboard />} />

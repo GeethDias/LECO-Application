@@ -15,11 +15,13 @@ const Login = () => {
             localStorage.setItem('token', token);
             localStorage.setItem('role', role);
             localStorage.setItem('id', userid);
-            console.log("token ", token);
-            console.log("userid ", userid);
-            window.location.href = role === 'AdminUser' ? '/admin/dashboard' : '/Select-Department'; //methana thibbe kalin /dashboard kiyala
+            window.location.href = role === 'AdminUser' ? '/admin/dashboard' : '/Select-Department';
         } catch (error) {
-            alert('Invalid credentials');
+            if (error.response && error.response.data.error) {
+                alert(error.response.data.error); // Show specific error message from the server
+            } else {
+                alert('Invalid credentials');
+            }
         }
     };
 
