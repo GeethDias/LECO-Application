@@ -70,7 +70,7 @@ const ManageUsers = () => {
                             <td>{user.fullName}</td>
                             <td>{user.email}</td>
                             <td>{user.role}</td>
-                            <td>{user.isLocked ? 'Locked' : 'Active'}</td>
+                            <td>{new Date(user.lockUntil) > Date.now() ? 'Locked' : 'Active'}</td>
                             <td>
                                 <Button
                                     variant="danger"
@@ -79,7 +79,7 @@ const ManageUsers = () => {
                                     Delete
                                 </Button>
 
-                                {user.isLocked && (
+                                {new Date(user.lockUntil) > Date.now() && (
                                     <Button
                                         variant="warning"
                                         onClick={() => unlockUser(user._id)}
@@ -88,6 +88,7 @@ const ManageUsers = () => {
                                         Unlock User
                                     </Button>
                                 )}
+
                             </td>
                         </tr>
                     ))}

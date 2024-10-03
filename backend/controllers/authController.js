@@ -33,7 +33,6 @@ const registerUser = async (req, res) => {
     }
 };
 
-// Login User
 const loginUser = async (req, res) => {
     const { email, password } = req.body;
 
@@ -43,18 +42,28 @@ const loginUser = async (req, res) => {
 
     // Check if user is locked
     if (user.lockUntil && user.lockUntil > Date.now()) {
+        user.isLocked = true; // Set isLocked to true if account is still locked
+        await user.save();
         return res.status(403).json({ error: `Account locked. Try again after ${new Date(user.lockUntil).toLocaleTimeString()}` });
+    }
+
+    // If lockUntil has passed, reset isLocked to false
+    if (user.lockUntil && user.lockUntil <= Date.now()) {
+        user.isLocked = false;  // Unlock the user after 20 minutes
+        user.lockUntil = null;   // Reset lockUntil
+        user.failedLoginAttempts = 0; // Reset failed attempts
+        await user.save();
     }
 
     // Check password
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
-        // Increment failed login attempts
         user.failedLoginAttempts += 1;
 
         // Lock account if 3 failed attempts are reached
         if (user.failedLoginAttempts >= 3) {
             user.lockUntil = Date.now() + 20 * 60 * 1000; // Lock for 20 minutes
+            user.isLocked = true; // Set isLocked to true when locked
             user.failedLoginAttempts = 0;  // Reset failed attempts after locking
         }
 
@@ -65,13 +74,14 @@ const loginUser = async (req, res) => {
     // Reset failed login attempts and lockUntil if login is successful
     user.failedLoginAttempts = 0;
     user.lockUntil = null;
+    user.isLocked = false; // Ensure user is unlocked after successful login
     await user.save();
 
     // Create and send token
     const token = jwt.sign({ id: user._id, role: user.role }, process.env.JWT_SECRET, { expiresIn: '1h' });
     res.status(200).json({ token, role: user.role, userid: user._id });
-
 };
+
 
 // Unlock User
 const unlockUser = async (req, res) => {
@@ -97,4 +107,5 @@ const unlockUser = async (req, res) => {
     }
 };
 
-module.exports = { registerUser,loginUser,unlockUser };
+
+module.exports = { registerUser, loginUser, unlockUser };
