@@ -37,6 +37,8 @@ app.use('/api/user', userRoutes);
 app.use('/api/user', marksRoutes);
 
 
+
+
 //connect to mongoose
 mongoose.connect(process.env.MONGO_URI)
     .then( () => { //After connecting to the database do the following
