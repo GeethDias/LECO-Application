@@ -1,7 +1,28 @@
-import React from 'react';
-import { Container, Row, Col, Card } from 'react-bootstrap';
+import React, { useState } from 'react';
+import { Container, Row, Col, Card, Form, Button, Alert } from 'react-bootstrap';
 
 const PasswordModuleContent = () => {
+  const [answer1, setAnswer1] = useState('');
+  const [answer2, setAnswer2] = useState('');
+  const [showAlert, setShowAlert] = useState(false);
+  const [alertMessage, setAlertMessage] = useState('');
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    // Validate answers
+    const correctAnswer1 = "Deny the login and immediately reset your password – This could be an unauthorized attempt, and securing your account is the priority.";
+    const correctAnswer2 = "All of the above.";
+
+    if (answer1 === correctAnswer1 && answer2 === correctAnswer2) {
+      setAlertMessage('Correct! You’ve selected the right answers. Well done!');
+    } else {
+      setAlertMessage('Incorrect answers. Please review and try again.');
+    }
+
+    setShowAlert(true); // Show alert with the result
+  };
+
   return (
     <Container className="mt-4">
       <Row>
@@ -37,11 +58,6 @@ const PasswordModuleContent = () => {
               <li>Avoid using the "remember password" feature in browsers and applications (e.g., email programs, web browsers).</li>
             </ul>
 
-            {/* Video component */}
-            <video width="800" controls>
-              <source src="/videos/Network_Fundamentals_Security_Module.mp4" type="video/mp4" />
-              Your browser does not support the video tag.
-            </video>
 
             <h4>3. Reporting Compromised Passwords</h4>
             <p>If you suspect or are aware that your password has been compromised, you must:</p>
@@ -65,6 +81,57 @@ const PasswordModuleContent = () => {
             <h4>6. Technical Enforcements</h4>
             <p>Some password security measures, such as password length or expiration, may be enforced automatically by our IT systems. These policies are in place to support your efforts in maintaining secure access to our systems.</p>
             <p>Your password is the first line of defense in protecting LECO’s systems and information. By following these guidelines, you contribute to a safer, more secure workplace. Always remember that password security is not just an IT issue but a personal responsibility.</p>
+          </Card>
+
+          <br />
+          <Card className="p-4">
+            <h2>Scenario Based Learning</h2>
+            <Form onSubmit={handleSubmit}>
+              <h4>Scenario 1</h4>
+              <p>You receive a notification on your phone about a login attempt to your work account from an unfamiliar location. You didn’t try to log in, and the notification asks you to either allow or deny the login.</p>
+              <Form.Group>
+                <Form.Label>Q1. What should you do next?</Form.Label>
+                <Form.Control as="select" value={answer1} onChange={(e) => setAnswer1(e.target.value)}>
+                  <option>Select an answer</option>
+                  <option>Allow the login – It might be a glitch, and there's no harm in allowing it.</option>
+                  <option>Ignore the notification – It’s probably nothing important.</option>
+                  <option>Deny the login and immediately reset your password – This could be an unauthorized attempt, and securing your account is the priority.</option>
+                  <option>Contact the IT department – Report the suspicious activity before taking further action.</option>
+                </Form.Control>
+              </Form.Group>
+              <br />
+              <h4>Scenario 2</h4>
+              <p>What is a good follow-up step after resetting your password?</p>
+              <Form.Group>
+                <Form.Label>Q2. Choose the best action:</Form.Label>
+                <Form.Control as="select" value={answer2} onChange={(e) => setAnswer2(e.target.value)}>
+                  <option>Select an answer</option>
+                  <option>Log out from all devices to ensure the security of your account.</option>
+                  <option>Monitor your account activity to check for any unfamiliar actions.</option>
+                  <option>Set up two-factor authentication (2FA) if it’s not already in place for an added layer of security.</option>
+                  <option>All of the above.</option>
+                </Form.Control>
+              </Form.Group>
+
+              <Button variant="primary" type="submit" className="mt-3">Submit Answers</Button>
+
+              {/* Alert to show the result */}
+              {showAlert && (
+                <Alert variant={alertMessage.includes('Correct') ? 'success' : 'danger'} className="mt-3">
+                  {alertMessage}
+                </Alert>
+              )}
+            </Form>
+          </Card>
+          <br/>
+          <br/>
+          <Card className="p-4">
+            <h2>Watch the video</h2>
+            {/* Video component */}
+            <video width="800" controls>
+              <source src="/videos/Introduction-to-Password-Security-Awareness.mp4" type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
           </Card>
         </Col>
       </Row>

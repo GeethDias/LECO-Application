@@ -9,6 +9,7 @@ import AccessControlIdentityManagementModule from '../Components/AccessControlId
 import PersonalDataSecurityModule from '../Components/PersonalDataSecurityModule';
 import SecureOnlinePaymentsModule from '../Components/SecureOnlinePaymentsModule';
 
+
 const ModuleQuiz = () => {
     const { moduleId } = useParams();  // Get the moduleId from the URL
     const [questions, setQuestions] = useState([]);
@@ -46,7 +47,7 @@ const ModuleQuiz = () => {
     const getModuleName = (moduleId) => {
         return moduleId.replace(/([A-Z])/g, ' $1').trim();  // Add a space before each capital letter
     };
-    
+
     // Updated calculateScore function to check for unanswered questions
     // Updated calculateScore function to check for unanswered questions
     const calculateScore = () => {
@@ -71,9 +72,9 @@ const ModuleQuiz = () => {
                 score += 1;
             }
         });
-       
-       // Send the calculated score to the backend
-        const token = localStorage.getItem('token'); 
+
+        // Send the calculated score to the backend
+        const token = localStorage.getItem('token');
         const moduleName = getModuleName(moduleId);
 
         fetch(`/api/user/marks`, {
@@ -83,7 +84,7 @@ const ModuleQuiz = () => {
                 'Authorization': `Bearer ${token}`
             },
             body: JSON.stringify({
-                userId: localStorage.getItem('id'), 
+                userId: localStorage.getItem('id'),
                 moduleId: moduleId,
                 moduleName: moduleName,
                 newMarks: score
@@ -126,51 +127,51 @@ const ModuleQuiz = () => {
             {moduleId === "SecureOnlinePaymentsModule" && <SecureOnlinePaymentsModule />}
 
             <Container>
-                <h2>{moduleId} Quiz</h2>
+                    <h2>{moduleId} Quiz</h2>
 
-                {unanswered && (  // Display alert if unanswered questions exist
-                    <Alert variant="danger">
-                        Please answer all questions before submitting the quiz.
-                    </Alert>
-                )}
+                    {unanswered && (  // Display alert if unanswered questions exist
+                        <Alert variant="danger">
+                            Please answer all questions before submitting the quiz.
+                        </Alert>
+                    )}
 
-                {Array.isArray(questions) && questions.length > 0 ? (
-                    questions.map((question, index) => (
-                        <React.Fragment key={question._id}>
-                            <Form.Group as={Row} className="mb-3">
-                                <Form.Label as="legend" column sm={12}>
-                                    {index + 1}. {question.questionText}
-                                </Form.Label>
-                                <Col sm={12}>
-                                    {question.options.map((option, i) => (
-                                        <Form.Check
-                                            key={i}
-                                            type="radio"
-                                            label={option}
-                                            name={`question${question._id}`}
-                                            id={`question${question._id}option${i}`}
-                                            onChange={() => handleAnswerChange(question._id, option)}
-                                        />
-                                    ))}
-                                </Col>
-                            </Form.Group>
-                        </React.Fragment>
-                    ))
-                ) : (
-                    <p>No questions available</p>
-                )}
+                    {Array.isArray(questions) && questions.length > 0 ? (
+                        questions.map((question, index) => (
+                            <React.Fragment key={question._id}>
+                                <Form.Group as={Row} className="mb-3">
+                                    <Form.Label as="legend" column sm={12}>
+                                        {index + 1}. {question.questionText}
+                                    </Form.Label>
+                                    <Col sm={12}>
+                                        {question.options.map((option, i) => (
+                                            <Form.Check
+                                                key={i}
+                                                type="radio"
+                                                label={option}
+                                                name={`question${question._id}`}
+                                                id={`question${question._id}option${i}`}
+                                                onChange={() => handleAnswerChange(question._id, option)}
+                                            />
+                                        ))}
+                                    </Col>
+                                </Form.Group>
+                            </React.Fragment>
+                        ))
+                    ) : (
+                        <p>No questions available</p>
+                    )}
 
-                {/* Submit Button */}
-                <Button onClick={calculateScore}>Submit</Button>
+                    {/* Submit Button */}
+                    <Button onClick={calculateScore}>Submit</Button>
 
-                {/* Green Go Back Button with a small gap */}
-                <Button
-                    variant="success"  // Bootstrap class for green color
-                    onClick={handleGoBack}
-                    className="ms-2"  // Adds a small left margin
-                >
-                    Go Back
-                </Button>
+                    {/* Green Go Back Button with a small gap */}
+                    <Button
+                        variant="success"  // Bootstrap class for green color
+                        onClick={handleGoBack}
+                        className="ms-2"  // Adds a small left margin
+                    >
+                        Go Back
+                    </Button>
             </Container>
             <Footer />
         </div>

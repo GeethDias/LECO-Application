@@ -1,7 +1,29 @@
-import React from 'react';
-import { Container, Row, Col, Card } from 'react-bootstrap';
+import React, { useState } from 'react';
+import { Container, Row, Col, Card, Form, Button, Alert } from 'react-bootstrap';
 
 const SecureOnlinePaymentsModule = () => {
+
+  const [answer1, setAnswer1] = useState('');
+  const [answer2, setAnswer2] = useState('');
+  const [showAlert, setShowAlert] = useState(false);
+  const [alertMessage, setAlertMessage] = useState('');
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    // Validate answers
+    const correctAnswer1 = "Stop the transaction and verify the legitimacy of the third-party page.";
+    const correctAnswer2 = "All of the above.";
+
+    if (answer1 === correctAnswer1 && answer2 === correctAnswer2) {
+      setAlertMessage('Correct! You’ve selected the right answers. Well done!');
+    } else {
+      setAlertMessage('Incorrect answers. Please review and try again.');
+    }
+
+    setShowAlert(true); // Show alert with the result
+  };
+
   return (
     <Container className="mt-4">
       <Row>
@@ -25,8 +47,9 @@ const SecureOnlinePaymentsModule = () => {
             <p>
               By the end, you’ll be handling your online payments like a cybersecurity ninja! 🥷 Let’s dive in!
             </p>
+            <br />
 
-            <h2>Introduction</h2>
+            <h1>Introduction</h1>
             <p>
               As Lanka Electricity Company (LECO) handles online transactions, ensuring the security of online payments is critical to protect both the company and its customers. This module provides best practices for managing secure online payments, safeguarding sensitive payment information, and complying with industry standards.
             </p>
@@ -75,6 +98,55 @@ const SecureOnlinePaymentsModule = () => {
             <p>
               Ensuring the security of online payments is essential to maintaining customer trust and protecting sensitive financial data. By following these guidelines, LECO can provide secure payment services while minimizing the risk of fraud or data breaches.
             </p>
+          </Card>
+          <br />
+          <Card className="p-4">
+            <h2>Scenario Based Learning</h2>
+            <Form onSubmit={handleSubmit}>
+              <h4>Scenario 1</h4>
+              <p>You are making an online purchase, and the website redirects you to a third-party payment page that looks slightly different from the usual checkout process. The page is asking for your card details.</p>
+              <Form.Group>
+                <Form.Label>Q1. What should you do next?</Form.Label>
+                <Form.Control as="select" value={answer1} onChange={(e) => setAnswer1(e.target.value)}>
+                  <option>Select an answer</option>
+                  <option>Enter your card details and complete the transaction. </option>
+                  <option>Stop the transaction and verify the legitimacy of the third-party page.</option>
+                  <option>Close the website immediately and check your card statement. </option>
+                  <option>Refresh the page and try again. </option>
+                </Form.Control>
+              </Form.Group>
+              <br />
+              <h4>Scenario 2</h4>
+              <p>What should you check for when entering your payment details on any website?</p>
+              <Form.Group>
+                <Form.Label>Q2. Choose the best action:</Form.Label>
+                <Form.Control as="select" value={answer2} onChange={(e) => setAnswer2(e.target.value)}>
+                  <option>Select an answer</option>
+                  <option>Make sure the website uses HTTPS encryption.</option>
+                  <option>Ensure the payment gateway is a trusted and well-known provider.</option>
+                  <option>Look for the padlock icon in the browser’s address bar.</option>
+                  <option>All of the above.</option>
+                </Form.Control>
+              </Form.Group>
+
+              <Button variant="primary" type="submit" className="mt-3">Submit Answers</Button>
+
+              {/* Alert to show the result */}
+              {showAlert && (
+                <Alert variant={alertMessage.includes('Correct') ? 'success' : 'danger'} className="mt-3">
+                  {alertMessage}
+                </Alert>
+              )}
+            </Form>
+          </Card>
+          <br/>
+          <Card className="p-4">
+            <h2>Watch the video</h2>
+            {/* Video component */}
+            <video width="800" controls>
+              <source src="/videos/Introduction-to-Secure-Online-Payments.mp4" type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
           </Card>
         </Col>
       </Row>

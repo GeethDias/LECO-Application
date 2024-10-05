@@ -49,15 +49,31 @@ const MyProfile = ({ user }) => {
             </div>
 
             <h2 className="marks-header">Marks for Modules</h2>
-            <ul className="marks-list">
+            <div className="marks-list">
                 {userMarks.map((mark, index) => (
-                    <li key={index} className="marks-item">
-                        <strong>Module:</strong> {mark.moduleName} -
-                        <strong>Previous Marks:</strong> {mark.previousMarks},
-                        <strong>New Marks:</strong> {mark.newMarks}
-                    </li>
+                    <div key={index} className="marks-item">
+                        <div className="marks-module">
+                            <strong>Module:</strong> {mark.moduleName}
+                        </div>
+                        <div className="marks-comparison">
+                            <div className="marks-previous">
+                                <strong>Previous Marks:</strong> {mark.previousMarks}
+                            </div>
+                            <div className="marks-new">
+                                <strong>New Marks:</strong> {mark.newMarks}
+                            </div>
+                        </div>
+                        <div className="progress-container">
+                            <progress 
+                                value={mark.newMarks} 
+                                max="100" 
+                                className="progress-bar"
+                            ></progress>
+                            <span>{mark.newMarks}%</span>
+                        </div>
+                    </div>
                 ))}
-            </ul>
+            </div>
 
             {/* Go Back Button */}
             <button className="go-back-btn" onClick={() => navigate(-1)}>Go Back</button>

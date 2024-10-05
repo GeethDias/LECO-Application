@@ -1,7 +1,29 @@
-import React from 'react';
-import { Container, Row, Col, Card } from 'react-bootstrap';
+import React, { useState } from 'react';
+import { Container, Row, Col, Card, Form, Button, Alert } from 'react-bootstrap';
 
 const PersonalDataSecurityModule = () => {
+  
+  const [answer1, setAnswer1] = useState('');
+  const [answer2, setAnswer2] = useState('');
+  const [showAlert, setShowAlert] = useState(false);
+  const [alertMessage, setAlertMessage] = useState('');
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    // Validate answers
+    const correctAnswer1 = "Check the sender’s email address and contact the company directly to verify the request.";
+    const correctAnswer2 = "All of the above.";
+
+    if (answer1 === correctAnswer1 && answer2 === correctAnswer2) {
+      setAlertMessage('Correct! You’ve selected the right answers. Well done!');
+    } else {
+      setAlertMessage('Incorrect answers. Please review and try again.');
+    }
+
+    setShowAlert(true); // Show alert with the result
+  };
+
   return (
     <Container className="mt-4">
       <Row>
@@ -65,6 +87,55 @@ const PersonalDataSecurityModule = () => {
             </ul>
 
             <p>Protecting personal data is a shared responsibility at LECO. By following these guidelines and implementing robust data security measures, employees can help ensure the privacy and security of personal information, maintaining trust and compliance with regulatory requirements.</p>
+          </Card>
+          <br/>
+          <Card className="p-4">
+            <h2>Scenario Based Learning</h2>
+            <Form onSubmit={handleSubmit}>
+              <h4>Scenario 1</h4>
+              <p>You receive an email from a service you use, asking you to verify your account by clicking on a link. The email looks official, but you don’t remember requesting any verification.</p>
+              <Form.Group>
+                <Form.Label>Q1. What should you do next?</Form.Label>
+                <Form.Control as="select" value={answer1} onChange={(e) => setAnswer1(e.target.value)}>
+                  <option>Select an answer</option>
+                  <option>Click the link to verify your account immediately. </option>
+                  <option>Reply to the email with your personal details to confirm your identity.</option>
+                  <option>Check the sender’s email address and contact the company directly to verify the request. </option>
+                  <option>Ignore the email; it’s probably just spam. </option>
+                </Form.Control>
+              </Form.Group>
+              <br />
+              <h4>Scenario 2</h4>
+              <p>What is a good follow-up step after resetting your password?</p>
+              <Form.Group>
+                <Form.Label>Q2. Choose the best action:</Form.Label>
+                <Form.Control as="select" value={answer2} onChange={(e) => setAnswer2(e.target.value)}>
+                  <option>Select an answer</option>
+                  <option>Log out from all devices to ensure the security of your account.</option>
+                  <option>Monitor your account activity to check for any unfamiliar actions.</option>
+                  <option>Set up two-factor authentication (2FA) if it’s not already in place for an added layer of security.</option>
+                  <option>All of the above.</option>
+                </Form.Control>
+              </Form.Group>
+
+              <Button variant="primary" type="submit" className="mt-3">Submit Answers</Button>
+
+              {/* Alert to show the result */}
+              {showAlert && (
+                <Alert variant={alertMessage.includes('Correct') ? 'success' : 'danger'} className="mt-3">
+                  {alertMessage}
+                </Alert>
+              )}
+            </Form>
+          </Card>
+          <br/>
+          <Card className="p-4">
+            <h2>Watch the video</h2>
+            {/* Video component */}
+            <video width="800" controls>
+              <source src="/videos/Introduction-to-Personal-Data-Security.mp4" type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
           </Card>
         </Col>
       </Row>
