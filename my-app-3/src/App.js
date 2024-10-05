@@ -3,7 +3,6 @@ import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import MyProfileView from './Pages/MyProfileView';
 import NotFound from './Pages/NotFound';
-import ReportIncident from './Pages/ReportIncident';
 import ResultsPage from './Pages/ResultsPage';
 import AdminQuestionForm from './Pages/Admin/AdminQuesionForm';
 import Dashboard from './Pages/Dashboard';
@@ -71,7 +70,7 @@ function App() {
           <Route path="Select-Department/Finance-Department" element={<FINANCEDepartment />} />
           <Route path="/ContactUs" element={<ContactUs />} />
           <Route path="/MyProfileView" element={<MyProfileView user={user} />} />
-          <Route path='/ReportIncident' element={<ReportIncident />} />
+          {/* <Route path='/ReportIssues' element={<ReportIssues />} /> */}
           <Route path="/ResultsPage" element={<ResultsPage />} />
           <Route
             path="/admin/AddQuestions"

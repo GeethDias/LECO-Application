@@ -41,6 +41,7 @@ const getQuestion = async (req, res) => {
 // create a new question
 const createquestion = async (req, res) => {
     const { moduleId, questionText, options, correctAnswer} = req.body
+    console.log("Question to Add", req.body)
     // add document to database
     try {
         const question = await Question.create({  moduleId, questionText, options, correctAnswer }) // moduleId, questionText, options, correctAnswer create a new document in MongoDB

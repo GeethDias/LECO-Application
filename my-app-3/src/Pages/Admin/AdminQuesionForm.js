@@ -24,16 +24,16 @@ const AddQuestion = () => {
     // Handle changing the number of options
     const handleNumOptionsChange = (e) => {
         let num = parseInt(e.target.value, 10);
-        
+
         // Prevent invalid values
         if (isNaN(num) || num < 2) {
             num = 2;
         } else if (num > 6) {
             num = 6;
         }
-        
+
         setNumOptions(num);
-        
+
         // Adjust the options array size based on selected number
         if (num > options.length) {
             setOptions([...options, ...Array(num - options.length).fill('')]);
@@ -59,40 +59,49 @@ const AddQuestion = () => {
             options,
             correctAnswer
         };
+        const token = localStorage.getItem('token');  // Retrieve token from localStorage
+        console.log("Retrieved token: ", token);  // Check if token is retrieved
 
+        if (!token) {
+            console.error("No token found in localStorage");
+            return;  // Stop if no token is found
+        }
+        console.log("newQuestion", newQuestion)
         // Make a POST request to your backend to add the question
         fetch('/api/questions', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
             },
             body: JSON.stringify(newQuestion),
         })
-        .then(response => response.json())
-        .then(data => {
-            alert('Question added successfully!');
-            // Reset the form after successful submission
-            setModuleId('');
-            setQuestionText('');
-            setNumOptions(2);
-            setOptions(['', '']);
-            setCorrectAnswer('');
-        })
-        .catch(error => console.error('Error adding question:', error));
+            .then(response => response.json())
+            .then(data => {
+                alert('Question added successfully!');
+                console.log("data ", data)
+                // Reset the form after successful submission
+                setModuleId('');
+                setQuestionText('');
+                setNumOptions(2);
+                setOptions(['', '']);
+                setCorrectAnswer('');
+            })
+            .catch(error => console.error('Error adding question:', error));
     };
 
     return (
         <div>
-            
+
             <Container>
                 <h2>Add a New Question</h2>
                 <Form onSubmit={handleSubmit}>
                     <Form.Group as={Row} className="mb-3">
                         <Form.Label column sm={2}>Module ID</Form.Label>
                         <Col sm={10}>
-                            <Form.Select 
-                                value={moduleId} 
-                                onChange={(e) => setModuleId(e.target.value)} 
+                            <Form.Select
+                                value={moduleId}
+                                onChange={(e) => setModuleId(e.target.value)}
                                 required
                             >
                                 <option value="">Select Module</option>
@@ -106,10 +115,10 @@ const AddQuestion = () => {
                     <Form.Group as={Row} className="mb-3">
                         <Form.Label column sm={2}>Question Text</Form.Label>
                         <Col sm={10}>
-                            <Form.Control 
-                                type="text" 
-                                value={questionText} 
-                                onChange={(e) => setQuestionText(e.target.value)} 
+                            <Form.Control
+                                type="text"
+                                value={questionText}
+                                onChange={(e) => setQuestionText(e.target.value)}
                                 required
                             />
                         </Col>
@@ -118,12 +127,12 @@ const AddQuestion = () => {
                     <Form.Group as={Row} className="mb-3">
                         <Form.Label column sm={2}>Number of Options</Form.Label>
                         <Col sm={10}>
-                            <Form.Control 
-                                type="number" 
-                                value={numOptions} 
-                                onChange={handleNumOptionsChange} 
-                                min="2" 
-                                max="6" 
+                            <Form.Control
+                                type="number"
+                                value={numOptions}
+                                onChange={handleNumOptionsChange}
+                                min="2"
+                                max="6"
                                 required
                             />
                         </Col>
@@ -133,11 +142,11 @@ const AddQuestion = () => {
                         <Form.Group as={Row} className="mb-3" key={index}>
                             <Form.Label column sm={2}>Option {index + 1}</Form.Label>
                             <Col sm={10}>
-                                <Form.Control 
-                                    type="text" 
-                                    value={option} 
-                                    onChange={(e) => handleOptionChange(index, e.target.value)} 
-                                    required 
+                                <Form.Control
+                                    type="text"
+                                    value={option}
+                                    onChange={(e) => handleOptionChange(index, e.target.value)}
+                                    required
                                 />
                             </Col>
                         </Form.Group>
@@ -146,9 +155,9 @@ const AddQuestion = () => {
                     <Form.Group as={Row} className="mb-3">
                         <Form.Label column sm={2}>Correct Answer</Form.Label>
                         <Col sm={10}>
-                            <Form.Select 
-                                value={correctAnswer} 
-                                onChange={(e) => setCorrectAnswer(e.target.value)} 
+                            <Form.Select
+                                value={correctAnswer}
+                                onChange={(e) => setCorrectAnswer(e.target.value)}
                                 required
                             >
                                 <option value="">Select Correct Answer</option>

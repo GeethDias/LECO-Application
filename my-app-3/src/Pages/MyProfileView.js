@@ -18,13 +18,13 @@ const MyProfile = ({ user }) => {
                 }
 
                 // Fetch user profile data
-                const profileResponse = await axios.get(`/api/user/profile`, {
+                const profileResponse = await axios.get('/api/user/profile', {
                     params: { userId }
                 });
                 setUserProfile(profileResponse.data);
 
                 // Fetch user marks
-                const marksResponse = await axios.get(`/api/user/marks`, {
+                const marksResponse = await axios.get('/api/user/marks', {
                     params: { userId }
                 });
                 setUserMarks(marksResponse.data);
@@ -52,8 +52,8 @@ const MyProfile = ({ user }) => {
             <ul className="marks-list">
                 {userMarks.map((mark, index) => (
                     <li key={index} className="marks-item">
-                        <strong>Module:</strong> {mark.moduleName} - 
-                        <strong>Previous Marks:</strong> {mark.previousMarks}, 
+                        <strong>Module:</strong> {mark.moduleName} -
+                        <strong>Previous Marks:</strong> {mark.previousMarks},
                         <strong>New Marks:</strong> {mark.newMarks}
                     </li>
                 ))}

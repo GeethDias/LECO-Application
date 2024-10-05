@@ -9,6 +9,8 @@ const mongoose = require('mongoose')
 const questionsRouter = require("./Routes/questionRoutes")
 const userRoutes = require('./Routes/userRoutes');
 const marksRoutes = require('./Routes/marksRoutes');
+
+
 //express app
 const  app = express()
 
@@ -21,6 +23,7 @@ app.use((req, res, next) => {
     console.log(req.path, req.method)
     next()
 })
+
 
 // API Routes
 app.use('/api', userRoutes);  // User routes for managing users

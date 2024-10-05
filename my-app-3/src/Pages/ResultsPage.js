@@ -11,6 +11,8 @@ const ResultsPage = () => {
     const { score, totalQuestions } = location.state;
     const navigate = useNavigate();  // useNavigate hook for navigation
 
+    
+
     // Define thresholds for different messages and images
     let resultMessage = "";
     let imageSrc = "";

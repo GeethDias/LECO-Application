@@ -46,7 +46,7 @@ const MyNavbar = ({ user, setUser }) => {
                         {user && (
                             <>
                                 <Nav.Link as={Link} to="/MyProfileView">My Profile</Nav.Link>
-                                <Nav.Link as={Link} to="/ReportIncident">Report Issues</Nav.Link>
+                                {/* <Nav.Link as={Link} to="/ReportIssues">Report Issues</Nav.Link> */}
                             </>
                         )}
 
