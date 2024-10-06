@@ -69,7 +69,7 @@ const MyProfile = ({ user }) => {
                                 max="100" 
                                 className="progress-bar"
                             ></progress>
-                            <span>{mark.newMarks}%</span>
+                            <span>{mark.newMarks*10}%</span>
                         </div>
                     </div>
                 ))}
