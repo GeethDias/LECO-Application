@@ -9,14 +9,14 @@ const modules = [
         text: "Training and Awareness Content for HR Department employees",
         link: "/module/AccessControlIdentityManagement",
         border: "primary",
-        imgSrc: "./image1.png"
+        imgSrc: "../access_control_module.webp"
     },
     {
         title: "Personal Data Security Module",
         text: "Training and Awareness content for Personal Data Security",
         link: "/module/PersonalDataSecurityModule",
         border: "secondary",
-        imgSrc: "./hr_department.png" 
+        imgSrc: "../personal_data.png" 
     }
 ];
 

@@ -9,7 +9,7 @@ const modules = [
         text: "Training and Awareness Content for Finance Department employees",
         link: "/module/SecureOnlinePaymentsModule",
         border: "primary",
-        imgSrc: "./image1.png"
+        imgSrc: "../secure_online_payment_module.jpg"
     }
 ];
 

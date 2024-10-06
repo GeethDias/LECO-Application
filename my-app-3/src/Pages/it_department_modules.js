@@ -9,21 +9,21 @@ const modules = [
         text: "Training and Awareness Content for Password Usage",
         link: "/module/PasswordModule",
         border: "primary",
-        imgSrc: "./image1.png"
+        imgSrc: "../password_usage_module.webp"
     },
     {
         title: "Secure Software Development Module",
         text: "Training and Awareness content for Secure Software Development",
         link: "/module/SecureSoftwareModule",
         border: "secondary",
-        imgSrc: "./hr_department.png"
+        imgSrc: "../secure_software_module.png"
     },
     {
         title: "Data Handling and Storage Module",
         text: "Training and Awareness Content for Data Handling",
         link: "/module/DataHandlingAndStorageModule",
         border: "success",
-        imgSrc: "./finance_department.png"
+        imgSrc: "../data_handling.png"
     }
 ];
 

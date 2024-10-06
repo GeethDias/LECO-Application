@@ -9,21 +9,21 @@ const modules = [
         text: "This quiz will help you to identify your current knowledge of security awareness",
         link: "/module/ITDepartmentInitialQuiz",
         border: "primary",
-        imgSrc: "./image1.png"
+        imgSrc: "../initial-quiz.png"
     },
     {
         title: "Initial Quiz for Human Resource Department",
         text: "This quiz will help you to identify your current knowledge of security awareness",
         link: "/module/HRDepartmentInitialQuiz",
         border: "secondary",
-        imgSrc: "./hr_department.png" 
+        imgSrc: "../initial-quiz.png" 
     },
     {
         title: "Initial Quiz for Finance Department",
         text: "This quiz will help you to identify your current knowledge of security awareness",
         link: "/module/FinanceInitialQuiz",
         border: "secondary",
-        imgSrc: "./hr_department.png" 
+        imgSrc: "../initial-quiz.png" 
     }
 ];
 
