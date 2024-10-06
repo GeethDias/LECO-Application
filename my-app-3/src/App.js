@@ -22,6 +22,7 @@ import FINANCEDepartment from './Pages/finance_department_modules';
 import ManageUsers from './Pages/Admin/ManageUsers';
 import AcceptableUsePolicy from './Pages/AcceptableUsePolicy';
 import InitialQuiz from './Pages/InitialQuizSelection';
+import AboutThisSystem from './Pages/AboutThisSystem';
 
 
 function App() {
@@ -73,6 +74,7 @@ function App() {
           <Route path="Select-Department/Initial-Quiz-Selection" element={<InitialQuiz/>} />
           <Route path="/ContactUs" element={<ContactUs />} />
           <Route path='/AcceptableUsePolicy' element={<AcceptableUsePolicy/>} />
+          <Route path='/AboutThisSystem' element={<AboutThisSystem/>} />
           <Route path="/MyProfileView" element={<MyProfileView user={user} />} />
           {/* <Route path='/ReportIssues' element={<ReportIssues />} /> */}
           <Route path="/ResultsPage" element={<ResultsPage />} />
