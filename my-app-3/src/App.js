@@ -21,6 +21,7 @@ import HRDepartment from './Pages/hr_department_modules';
 import FINANCEDepartment from './Pages/finance_department_modules';
 import ManageUsers from './Pages/Admin/ManageUsers';
 import AcceptableUsePolicy from './Pages/AcceptableUsePolicy';
+import InitialQuiz from './Pages/InitialQuizSelection';
 
 
 function App() {
@@ -69,6 +70,7 @@ function App() {
           <Route path="/Select-Department/IT-Department" element={<ITDepartment />} />
           <Route path="/Select-Department/HR-Department" element={<HRDepartment />} />
           <Route path="Select-Department/Finance-Department" element={<FINANCEDepartment />} />
+          <Route path="Select-Department/Initial-Quiz-Selection" element={<InitialQuiz/>} />
           <Route path="/ContactUs" element={<ContactUs />} />
           <Route path='/AcceptableUsePolicy' element={<AcceptableUsePolicy/>} />
           <Route path="/MyProfileView" element={<MyProfileView user={user} />} />

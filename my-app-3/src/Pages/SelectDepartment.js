@@ -29,7 +29,7 @@ const modules = [
     {
         title: "Check Your Initial Knowledge",
         text: "This Quiz will test your currentl knowledge on security awareness",
-        link: "/module/InternetUsagePolicy",
+        link: "/Select-Department/Initial-Quiz-Selection",
         border: "success",
         imgSrc: "./initial_quiz.png"
     }

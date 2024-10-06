@@ -8,6 +8,9 @@ import DataHandlingAndStorageModule from '../Components/DataHandlingAndStorageMo
 import AccessControlIdentityManagementModule from '../Components/AccessControlIdentityManagementModule';
 import PersonalDataSecurityModule from '../Components/PersonalDataSecurityModule';
 import SecureOnlinePaymentsModule from '../Components/SecureOnlinePaymentsModule';
+import ITDepartmentInitialQuiz from '../Components/ITDepartmentInitialQuiz';
+import HRDepartmentInitialQuiz from '../Components/HRDepartmentInitialQuiz';
+import FinanceInitialQuiz from '../Components/FinanceInitialQuiz';
 
 
 const ModuleQuiz = () => {
@@ -118,13 +121,16 @@ const ModuleQuiz = () => {
 
     return (
         <div>
-            {/* Conditionally load PasswordModuleContent before the Container */}
+            {/* Conditionally load Page Content from Components folder before the Container */}
             {moduleId === "PasswordModule" && <PasswordModuleContent />}
             {moduleId === "SecureSoftwareModule" && <SecureSoftwareDevelopmentModule />}
             {moduleId === "DataHandlingAndStorageModule" && <DataHandlingAndStorageModule />}
             {moduleId === "AccessControlIdentityManagement" && <AccessControlIdentityManagementModule />}
             {moduleId === "PersonalDataSecurityModule" && <PersonalDataSecurityModule />}
             {moduleId === "SecureOnlinePaymentsModule" && <SecureOnlinePaymentsModule />}
+            {moduleId === "ITDepartmentInitialQuiz" && <ITDepartmentInitialQuiz/>}
+            {moduleId === "HRDepartmentInitialQuiz" && <HRDepartmentInitialQuiz/>}
+            {moduleId === "FinanceInitialQuiz" && <FinanceInitialQuiz/>}
 
             <Container>
                     <h2>{moduleId} Quiz</h2>

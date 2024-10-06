@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Container, Form, Row, Col, Button } from 'react-bootstrap';
+import { Container, Form, Row, Col, Button, Card } from 'react-bootstrap';
 
 const AddQuestion = () => {
     const [moduleId, setModuleId] = useState('');
@@ -19,7 +19,10 @@ const AddQuestion = () => {
         "DataHandlingAndStorageModule",
         "AccessControlIdentityManagement",
         "PersonalDataSecurityModule",
-        "SecureOnlinePaymentsModule"
+        "SecureOnlinePaymentsModule",
+        "ITDepartmentInitialQuiz",
+        "HRDepartmentInitialQuiz",
+        "FinanceInitialQuiz"
     ];
 
     // Fetch questions from backend when a module is selected
@@ -181,18 +184,24 @@ const AddQuestion = () => {
                     <Button variant="primary" type="submit">Add Question</Button>
                 </Form>
                     <br/>
-                <h3>Existing Questions for The Selected Module</h3>
+                <h3>Delete Questions From Selected Module</h3>
+                <br/>
                 {questions.length > 0 ? (
-                    <ul>
+                    <Row>
                         {questions.map(question => (
-                            <li key={question._id}>
-                                {question.questionText}
-                                <Button variant="danger" onClick={() => handleDelete(question._id)}>
-                                    Delete
-                                </Button>
-                            </li>
+                            <Col key={question._id} sm={12} md={6} lg={4}>
+                                <Card className="mb-3">
+                                    <Card.Body>
+                                        <Card.Title>Question</Card.Title>
+                                        <Card.Text>{question.questionText}</Card.Text>
+                                        <Button variant="danger" onClick={() => handleDelete(question._id)}>
+                                            Delete
+                                        </Button>
+                                    </Card.Body>
+                                </Card>
+                            </Col>
                         ))}
-                    </ul>
+                    </Row>
                 ) : (
                     <p>No questions found for this module.</p>
                 )}

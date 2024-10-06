@@ -47,6 +47,7 @@ const MyNavbar = ({ user, setUser }) => {
                             <>
                                 <Nav.Link as={Link} to="/MyProfileView">My Profile</Nav.Link>
                                 {/* <Nav.Link as={Link} to="/ReportIssues">Report Issues</Nav.Link> */}
+                                <Nav.Link as={Link} to="/Select-Department">Home</Nav.Link>
                             </>
                         )}
 
@@ -59,7 +60,7 @@ const MyNavbar = ({ user, setUser }) => {
                             <Nav.Link as={Link} to="/login">Login</Nav.Link>
                         )}
 
-                        <NavDropdown title="More Links" id="basic-nav-dropdown">
+                        {/* <NavDropdown title="More Links" id="basic-nav-dropdown">
                             <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
                             <NavDropdown.Item href="#action/3.2">
                                 Another action
@@ -69,7 +70,7 @@ const MyNavbar = ({ user, setUser }) => {
                             <NavDropdown.Item href="#action/3.4">
                                 Separated link
                             </NavDropdown.Item>
-                        </NavDropdown>
+                        </NavDropdown> */}
                     </Nav>
                 </Navbar.Collapse>
             </Container>
