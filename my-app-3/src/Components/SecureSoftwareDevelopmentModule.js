@@ -25,14 +25,14 @@ const SecureSoftwareDevelopmentModule = () => {
             <h2>Introduction</h2>
             <p>As technology advances, so do the threats to the systems and software we develop. At Lanka Electricity Company (LECO), ensuring the security of software from the earliest stages of development is essential to safeguarding our operations and data. This module provides guidance for IT department employees on best practices and principles for secure software development.</p>
 
-            <h4>1. Embrace a Security-First Mindset</h4>
+            <h4>Embrace a Security-First Mindset</h4>
             <p>Security should be integrated into every stage of the software development lifecycle (SDLC). Whether designing, coding, or testing, security must always be a priority:</p>
             <ul>
               <li><strong>Secure by design:</strong> Make security a part of your design from the start, not as an afterthought.</li>
               <li><strong>Threat modeling:</strong> Before coding begins, identify potential security risks and vulnerabilities that may affect the application and address them during development.</li>
             </ul>
 
-            <h4>2. Secure Coding Practices</h4>
+            <h4>Secure Coding Practices</h4>
             <p>Using secure coding practices helps prevent common vulnerabilities that attackers might exploit. Follow these guidelines to write secure code:</p>
             <ul>
               <li><strong>Input validation:</strong> Always validate user input to ensure it’s of the expected format and within permitted parameters. This prevents attacks such as SQL injection, cross-site scripting (XSS), and buffer overflows.</li>
@@ -43,7 +43,7 @@ const SecureSoftwareDevelopmentModule = () => {
               <li><strong>Avoid hardcoding credentials:</strong> Never embed sensitive information like passwords or API keys directly into the source code.</li>
             </ul>
 
-            <h4>3. Follow Secure Development Frameworks and Standards</h4>
+            <h4>Follow Secure Development Frameworks and Standards</h4>
             <p>Where possible, use frameworks and libraries that promote secure development:</p>
             <ul>
               <li><strong>OWASP Secure Coding Guidelines:</strong> Follow the Open Web Application Security Project (OWASP) secure coding practices to protect against common vulnerabilities.</li>
@@ -51,7 +51,7 @@ const SecureSoftwareDevelopmentModule = () => {
               <li><strong>Use trusted libraries:</strong> Ensure that third-party libraries and open-source components are from trusted sources, and regularly check for vulnerabilities.</li>
             </ul>
 
-            <h4>4. Conduct Regular Code Reviews and Security Testing</h4>
+            <h4>Conduct Regular Code Reviews and Security Testing</h4>
             <p>It’s crucial to identify security issues as early as possible:</p>
             <ul>
               <li><strong>Code reviews:</strong> Engage in peer code reviews with a focus on identifying potential security weaknesses.</li>
@@ -60,7 +60,7 @@ const SecureSoftwareDevelopmentModule = () => {
               <li><strong>Automated testing:</strong> Incorporate automated security testing to find security issues during the development process.</li>
             </ul>
 
-            <h4>5. Secure Software Configuration</h4>
+            <h4>Secure Software Configuration</h4>
             <p>Once the software is deployed, ensure its configuration is secure:</p>
             <ul>
               <li><strong>Principle of least privilege:</strong> Ensure that software components run with the minimum level of permissions required to perform their tasks.</li>
@@ -68,7 +68,7 @@ const SecureSoftwareDevelopmentModule = () => {
               <li><strong>Patch management:</strong> Regularly apply security patches and updates to the software to protect against newly discovered vulnerabilities.</li>
             </ul>
 
-            <h4>6. Maintain Secure Development Environments</h4>
+            <h4>Maintain Secure Development Environments</h4>
             <p>Ensure that the development environments are secure to avoid any breaches during the coding process:</p>
             <ul>
               <li><strong>Access controls:</strong> Limit access to the development environment to authorized personnel only.</li>
@@ -76,7 +76,7 @@ const SecureSoftwareDevelopmentModule = () => {
               <li><strong>Secure repositories:</strong> Use secure version control systems and repositories for storing and managing source code.</li>
             </ul>
 
-            <h4>7. Incident Response in Development</h4>
+            <h4>Incident Response in Development</h4>
             <p>Have a plan in place for dealing with security incidents during the software development lifecycle:</p>
             <ul>
               <li><strong>Logging and monitoring:</strong> Implement logging to monitor for suspicious activity within the software. Ensure logs are secure and retained for the appropriate period.</li>
