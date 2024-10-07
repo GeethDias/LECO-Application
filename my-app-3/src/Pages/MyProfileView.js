@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import './MyProfileView.css'; // Add this CSS file for styling
+import './MyProfileView.css';
+import Footer from '../Components/Footer';
 
 const MyProfile = ({ user }) => {
     const [userProfile, setUserProfile] = useState(null);
@@ -77,6 +78,7 @@ const MyProfile = ({ user }) => {
 
             {/* Go Back Button */}
             <button className="go-back-btn" onClick={() => navigate(-1)}>Go Back</button>
+            <Footer/>
         </div>
     );
 }

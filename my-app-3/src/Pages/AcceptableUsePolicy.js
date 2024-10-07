@@ -1,4 +1,5 @@
 import { Container, Row, Col, Card } from 'react-bootstrap';
+import Footer from '../Components/Footer';
 
 const AcceptableUsePolicy = () => {
   return (
@@ -78,6 +79,7 @@ const AcceptableUsePolicy = () => {
           </Card>
         </Col>
       </Row>
+      <Footer/>
     </Container>
   );
 };
