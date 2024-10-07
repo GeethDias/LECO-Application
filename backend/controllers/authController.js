@@ -33,6 +33,7 @@ const registerUser = async (req, res) => {
     }
 };
 
+//to login the user
 const loginUser = async (req, res) => {
     const { email, password } = req.body;
 
@@ -83,7 +84,7 @@ const loginUser = async (req, res) => {
 };
 
 
-// Unlock User
+// to Unlock User
 const unlockUser = async (req, res) => {
     try {
         const userId = req.params.id;
@@ -107,5 +108,5 @@ const unlockUser = async (req, res) => {
     }
 };
 
-
+//export the functions
 module.exports = { registerUser, loginUser, unlockUser };
