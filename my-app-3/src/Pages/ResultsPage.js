@@ -32,7 +32,7 @@ const ResultsPage = () => {
         imageSrc = "/good-score.jpg";
     } else {
         resultTitle = "Keep Trying!";
-        resultMessage = "Don't be discouraged, you can improve with another attempt!";
+        resultMessage = "Don't be discouraged, you can improve with another attempt!.";
         imageSrc = "/try-again.png";
     }
 
