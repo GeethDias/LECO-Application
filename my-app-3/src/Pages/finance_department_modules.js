@@ -10,6 +10,13 @@ const modules = [
         link: "/module/SecureOnlinePaymentsModule",
         border: "primary",
         imgSrc: "../secure_online_payment_module.jpg"
+    },
+    {
+        title: "Password Usage Module",
+        text: "Training and Awareness Content for Password Usage",
+        link: "/module/PasswordModule",
+        border: "primary",
+        imgSrc: "../password_usage_module.webp"
     }
 ];
 

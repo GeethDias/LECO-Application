@@ -49,7 +49,7 @@ const SecureOnlinePaymentsModule = () => {
             </p>
             <br />
 
-            <h1>Introduction</h1>
+            <h2>Introduction</h2>
             <p>
               As Lanka Electricity Company (LECO) handles online transactions, ensuring the security of online payments is critical to protect both the company and its customers. This module provides best practices for managing secure online payments, safeguarding sensitive payment information, and complying with industry standards.
             </p>
