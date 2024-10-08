@@ -2,15 +2,13 @@ import React from 'react';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-import NavDropdown from 'react-bootstrap/NavDropdown';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
-
+import './Navbar.css';
 
 const MyNavbar = ({ user, setUser }) => {
-
-    console.log("user ", user)
     const navigate = useNavigate();
+    const location = useLocation();  // Get current route
 
     const handleLogout = () => {
         // Clear token and role from localStorage
@@ -39,38 +37,64 @@ const MyNavbar = ({ user, setUser }) => {
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="me-auto">
-                        <Nav.Link as={Link} to="/AboutThisSystem">About This System</Nav.Link>
-                        <Nav.Link as={Link} to="/AcceptableUsePolicy">Acceptable Use Policy</Nav.Link>
+                        <Nav.Link 
+                            as={Link} 
+                            to="/AboutThisSystem" 
+                            className={location.pathname === '/AboutThisSystem' ? 'active-link' : ''}>
+                            About This System
+                        </Nav.Link>
+                        <Nav.Link 
+                            as={Link} 
+                            to="/AcceptableUsePolicy" 
+                            className={location.pathname === '/AcceptableUsePolicy' ? 'active-link' : ''}>
+                            Acceptable Use Policy
+                        </Nav.Link>
 
                         {/* Only show these links if the user is authenticated */}
                         {user && (
                             <>
-                                <Nav.Link as={Link} to="/MyProfileView">My Profile</Nav.Link>
-                                {/* <Nav.Link as={Link} to="/ReportIssues">Report Issues</Nav.Link> */}
-                                <Nav.Link as={Link} to="/Select-Department">Home</Nav.Link>
+                                <Nav.Link 
+                                    as={Link} 
+                                    to="/MyProfileView" 
+                                    className={location.pathname === '/MyProfileView' ? 'active-link' : ''}>
+                                    My Profile
+                                </Nav.Link>
+                                <Nav.Link 
+                                    as={Link} 
+                                    to="/Select-Department" 
+                                    className={location.pathname === '/Select-Department' ? 'active-link' : ''}>
+                                    Home
+                                </Nav.Link>
+
+                                {/* Only show the Admin Dashboard link if the user is an Admin */}
+                                {user.role === 'AdminUser' && (
+                                    <Nav.Link 
+                                        as={Link} 
+                                        to="/admin/dashboard" 
+                                        className={location.pathname === '/admin/dashboard' ? 'active-link' : ''}>
+                                        Admin Dashboard
+                                    </Nav.Link>
+                                )}
                             </>
                         )}
 
-                        <Nav.Link as={Link} to="/ContactUs">Contact Us</Nav.Link>
+                        <Nav.Link 
+                            as={Link} 
+                            to="/ContactUs" 
+                            className={location.pathname === '/ContactUs' ? 'active-link' : ''}>
+                            Contact Us
+                        </Nav.Link>
 
                         {/* Show Login/Logout based on authentication status */}
                         {user ? (
-                            <Nav.Link as={Link} to="/login" onClick={handleLogout}>Logout</Nav.Link>
+                            <Nav.Link as={Link} to="/login" onClick={handleLogout}>
+                                Logout
+                            </Nav.Link>
                         ) : (
-                            <Nav.Link as={Link} to="/login">Login</Nav.Link>
+                            <Nav.Link as={Link} to="/login" className={location.pathname === '/login' ? 'active-link' : ''}>
+                                Login
+                            </Nav.Link>
                         )}
-
-                        {/* <NavDropdown title="More Links" id="basic-nav-dropdown">
-                            <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-                            <NavDropdown.Item href="#action/3.2">
-                                Another action
-                            </NavDropdown.Item>
-                            <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
-                            <NavDropdown.Divider />
-                            <NavDropdown.Item href="#action/3.4">
-                                Separated link
-                            </NavDropdown.Item>
-                        </NavDropdown> */}
                     </Nav>
                 </Navbar.Collapse>
             </Container>
