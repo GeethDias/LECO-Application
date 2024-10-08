@@ -47,6 +47,9 @@ const MyProfile = ({ user }) => {
                 <p><strong>Email:</strong> {userProfile.email}</p>
                 <p><strong>Department:</strong> {userProfile.department}</p>
                 <p><strong>Employment ID:</strong> {userProfile.employmentId}</p>
+
+                {/* Display the user's role */}
+                <p><strong>Role:</strong> {user?.role}</p>
             </div>
 
             <h2 className="marks-header">Marks for Modules</h2>
