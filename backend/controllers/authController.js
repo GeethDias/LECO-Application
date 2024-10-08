@@ -3,7 +3,6 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const { body, validationResult } = require('express-validator');
 
-// Register User
 const registerUser = async (req, res) => {
     const { fullName, employmentId, email, department, password } = req.body;
 
@@ -26,12 +25,14 @@ const registerUser = async (req, res) => {
             role: 'NormalUser'
         });
         await newUser.save();
-        res.status(201).json({ message: 'User registered successfully' });
+        res.status(201).json({ message: 'User registered successfully', newUser });
     } catch (error) {
         res.status(500).json({ error: error.message });
-        console.log(error.message)
     }
 };
+
+
+
 
 //to login the user
 const loginUser = async (req, res) => {
