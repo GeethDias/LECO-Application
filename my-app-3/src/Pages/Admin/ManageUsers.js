@@ -148,7 +148,8 @@ const ManageUsers = () => {
                     Register User
                 </Button>
             </Form>
-
+            <br/>
+            <h3>Delete and Unlock Users</h3>
             {/* Users Table */}
             <Table striped bordered hover responsive className="mt-4">
                 <thead>
