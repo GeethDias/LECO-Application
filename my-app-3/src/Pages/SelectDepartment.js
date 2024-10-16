@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './SelectDepartment.css';  // Import the new CSS file
 import { Link } from 'react-router-dom';
 import Card from 'react-bootstrap/Card';
 import Footer from '../Components/Footer';
+
 
 const modules = [
     {
@@ -36,10 +37,11 @@ const modules = [
 ];
 
 const SelectDepartment = () => {
+
     return (
-        <div className="page-container">     
+        <div className="page-container">
             <div className="content-wrap">
-            <h1>Select Your Department</h1>
+                <h1>Select Your Department</h1>
                 <div className="Departments">
                     {modules.map((module, index) => (
                         <div key={index}>
