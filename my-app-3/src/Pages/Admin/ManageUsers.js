@@ -43,8 +43,9 @@ const ManageUsers = () => {
 
     // Handle unlock user
     const unlockUser = async (userId) => {
+        console.log('user Id', userId)
         try {
-            await axios.patch(`/api/users/unlock/${userId}`);
+            await axios.patch(`/api/auth/unlock/${userId}`);
             setUsers(users.map(user =>
                 user._id === userId ? { ...user, isLocked: false, lockUntil: null } : user
             ));
