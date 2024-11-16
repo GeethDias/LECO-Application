@@ -94,6 +94,7 @@ function App() {
               </ProtectedRoute>
             }
           />
+
           <Route path="/module/:moduleId" element={<ModuleQuiz />} />
           <Route path="/register" element={<Register />} />
           <Route path="/dashboard" element={<Dashboard />} />
