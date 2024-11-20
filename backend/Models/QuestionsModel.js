@@ -1,7 +1,11 @@
 const mongoose = require('mongoose');
 
 const questionSchema = new mongoose.Schema({
-    moduleId: String,          // ID of the module
+    moduleId: { 
+        type: mongoose.Schema.Types.ObjectId, // Reference to the Module model
+        ref: 'Module',                        // Name of the model to reference
+        required: true                        // Ensure that every question is linked to a module
+    },
     questionText: String,      // The quiz question
     options: [String],         // Possible answer options
     correctAnswer: String, 

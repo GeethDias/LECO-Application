@@ -6,7 +6,7 @@ const getUserMarks = async (req, res) => {
 
     try {
         console.log("user id, ", userId)
-        const marks = await Marks.find({ userId });
+        const marks = await Marks.find({ userId }).populate('moduleId');
         console.log("Marks ", marks)
 
         if (!marks.length) {
@@ -21,10 +21,10 @@ const getUserMarks = async (req, res) => {
 
 // Add user's marks by userId
 const addUserMarks = async (req, res) => {
-    const { userId, moduleId, moduleName, newMarks } = req.body;
-    console.log("user id ", userId, "\nmodule id", moduleId,"\nmoduleName", moduleName, "\nnew Marks", newMarks)
+    const { userId, moduleId, newMarks } = req.body;
+    console.log("user id ", userId, "\nmodule id", moduleId,"\nnew Marks", newMarks)
     // Check if required fields are provided
-    if (!userId || !moduleId || !moduleName || newMarks == null) {
+    if (!userId || !moduleId || newMarks == null) {
         return res.status(400).json({ message: 'All fields are required' });
     }
 
@@ -39,7 +39,6 @@ const addUserMarks = async (req, res) => {
             const newMarksEntry = new Marks({
                 userId,
                 moduleId,
-                moduleName,
                 previousMarks: 0, // No previous marks as it's a new entry
                 newMarks
             });

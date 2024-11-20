@@ -23,6 +23,7 @@ import ManageUsers from './Pages/Admin/ManageUsers';
 import AcceptableUsePolicy from './Pages/AcceptableUsePolicy';
 import InitialQuiz from './Pages/InitialQuizSelection';
 import AboutThisSystem from './Pages/AboutThisSystem';
+import AddModules from './Pages/Admin/AddModules';
 
 
 function App() {
@@ -91,6 +92,14 @@ function App() {
             element={
               <ProtectedRoute user={user} requiredRole="AdminUser">
                 <ManageUsers />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/admin/add-modules"
+            element={
+              <ProtectedRoute user={user} requiredRole="AdminUser">
+                <AddModules />
               </ProtectedRoute>
             }
           />

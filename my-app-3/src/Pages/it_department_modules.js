@@ -1,34 +1,44 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Card from 'react-bootstrap/Card';
 import Footer from '../Components/Footer';
-
-const modules = [
-    {
-        title: "Password Usage Module",
-        text: "Training and Awareness Content for Password Usage",
-        link: "/module/PasswordModule",
-        border: "primary",
-        imgSrc: "../password_usage_module.webp",
-        label: "General Module" // Label for this module
-    },
-    {
-        title: "Secure Software Development Module",
-        text: "Training and Awareness content for Secure Software Development",
-        link: "/module/SecureSoftwareModule",
-        border: "secondary",
-        imgSrc: "../secure_software_module.png"
-    },
-    {
-        title: "Data Handling and Storage Module",
-        text: "Training and Awareness Content for Data Handling",
-        link: "/module/DataHandlingAndStorageModule",
-        border: "success",
-        imgSrc: "../data_handling.png"
-    }
-];
+import axios from 'axios'; // For API requests
 
 const ITDepartment = () => {
+    const [modules, setModules] = useState([]); // State to store modules
+    const [loading, setLoading] = useState(true); // State to manage loading
+    const [error, setError] = useState(null); // State to handle errors
+
+    useEffect(() => {
+        // Fetch modules for the IT department
+        const fetchModules = async () => {
+            try {
+                const token = localStorage.getItem('token');
+                const response = await axios.get('/api/modules?department=IT', {
+                    headers: {
+                        'Authorization': `Bearer ${token}` // Include the Authorization header
+                    }
+                })
+                setModules(response.data);
+            } catch (err) {
+                console.error('Error fetching IT modules:', err);
+                setError('Failed to fetch modules.');
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchModules();
+    }, []);
+
+    if (loading) {
+        return <div>Loading modules...</div>;
+    }
+
+    if (error) {
+        return <div>{error}</div>;
+    }
+
     return (
         <div className="page-container">
             <div className="content-wrap">
@@ -36,11 +46,11 @@ const ITDepartment = () => {
                 <div className="Departments">
                     {modules.map((module, index) => (
                         <div key={index}>
-                            <Card border={module.border} className="Card" style={{ width: '18rem' }}>
-                                <Card.Img variant="top" src={module.imgSrc} alt={`${module.title} Logo`} />
+                            <Card border="primary" className="Card" style={{ width: '18rem' }}>
+                                <Card.Img variant="top" src={`http://localhost:3000/${module.imagePath}` || '../placeholder_image.png'} alt={`${module.title} Logo`} />
                                 <Card.Body>
                                     <Card.Title>{module.title}</Card.Title>
-                                    <Card.Text>{module.text}</Card.Text>
+                                    <Card.Text>{module.description}</Card.Text>
                                     {/* Conditionally render the label */}
                                     {module.label && (
                                         <span style={{
@@ -57,7 +67,7 @@ const ITDepartment = () => {
                                     )}
                                 </Card.Body>
                                 <Card.Body>
-                                    <Card.Link as={Link} to={module.link}>View</Card.Link>
+                                    <Card.Link as={Link} to={`/module/${module._id}`}>View</Card.Link>
                                 </Card.Body>
                             </Card>
                         </div>

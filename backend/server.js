@@ -1,42 +1,35 @@
 require('dotenv').config()
-
-//newly added for authentication
-const authRoutes = require('./Routes/authRoutes');
 const express = require('express')
-
-//require the mongoose database
-const mongoose = require('mongoose')
+const mongoose = require('mongoose') //require the mongoose database
+const path = require('path');
+const cors = require('cors');
+const authRoutes = require('./Routes/authRoutes');
 const questionsRouter = require("./Routes/questionRoutes")
 const userRoutes = require('./Routes/userRoutes');
 const marksRoutes = require('./Routes/marksRoutes');
+const moduleRoutes = require('./Routes/modulesRoutes');
 
 
 //express app
 const  app = express()
 
-
-
 //middleware
 app.use(express.json()) 
-
+app.use(cors())
+app.use(express.urlencoded({ extended: true }));
 app.use((req, res, next) => {
     console.log(req.path, req.method)
     next()
 })
 
-
 // API Routes
 app.use('/api', userRoutes);  // User routes for managing users
-
 app.use('/api/questions', questionsRouter)
-
-// Middleware for authentication (newly added)
-app.use('/api/auth', authRoutes);
-
+app.use('/api/auth', authRoutes); // Middleware for authentication (newly added)
 app.use('/api/user', userRoutes);
 app.use('/api/user', marksRoutes);
-
-//added router post
+app.use('/api/modules', moduleRoutes)
+app.use('/uploads', express.static(path.join(__dirname, 'uploads'))); // Serve static files (uploaded files)
 
 
 //connect to mongoose

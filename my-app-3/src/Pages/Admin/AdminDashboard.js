@@ -33,6 +33,19 @@ const AdminDashboard = () => {
               </Card.Body>
             </Card>
           </Col>
+
+
+          <Col md={4}>
+            <Card className="mb-4">
+              <Card.Body>
+                <Card.Title>Add Modules</Card.Title>
+                <Card.Text>
+                  Add new modules to the system.
+                </Card.Text>
+                <Link to="/admin/add-modules" className="btn btn-primary">Add Modules</Link>
+              </Card.Body>
+            </Card>
+          </Col>
         </Row>
       </Container>
     </div>
