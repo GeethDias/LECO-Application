@@ -8,6 +8,7 @@ const questionsRouter = require("./Routes/questionRoutes")
 const userRoutes = require('./Routes/userRoutes');
 const marksRoutes = require('./Routes/marksRoutes');
 const moduleRoutes = require('./Routes/modulesRoutes');
+const policyRoutes = require('./Routes/policyRoutes');
 
 
 //express app
@@ -30,6 +31,7 @@ app.use('/api/user', userRoutes);
 app.use('/api/user', marksRoutes);
 app.use('/api/modules', moduleRoutes)
 app.use('/uploads', express.static(path.join(__dirname, 'uploads'))); // Serve static files (uploaded files)
+app.use('/api/policy', policyRoutes);
 
 
 //connect to mongoose
