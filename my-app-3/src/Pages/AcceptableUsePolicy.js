@@ -3,14 +3,22 @@ import { Editor } from '@tinymce/tinymce-react';
 import axios from 'axios';
 import { Container, Row, Col, Card } from 'react-bootstrap';
 import Footer from '../Components/Footer';
+import { useLocation } from 'react-router-dom';
 
 const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:4000';
 
 const AcceptableUsePolicy = () => {
+  const location = useLocation();
   const [policyContent, setPolicyContent] = useState('');
-  const [isEditing, setIsEditing] = useState(false);
+  const [isEditing, setIsEditing] = useState(location.state?.isEditing ?? false);
   const [loading, setLoading] = useState(true);
 
+  useEffect(() => {
+    if (location.state?.isEditing) {
+      setIsEditing(location.state.isEditing);
+    }
+  }, [location]);
+  
   useEffect(() => {
     const token = localStorage.getItem('token');
     if (!token) {

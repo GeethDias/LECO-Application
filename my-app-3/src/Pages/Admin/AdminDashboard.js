@@ -46,6 +46,27 @@ const AdminDashboard = () => {
               </Card.Body>
             </Card>
           </Col>
+
+          <Col md={4}>
+            <Card className="mb-4">
+              <Card.Body>
+                <Card.Title>Update Policy</Card.Title>
+                <Card.Text>
+                  Update the Acceptable Use Policy.
+                </Card.Text>
+                <Link
+                  to={{
+                    pathname: "/AcceptableUsePolicy",
+                    state: { isEditing: true },
+                  }}
+                  className="btn btn-primary"
+                >
+                  Update Policy
+                </Link>
+              </Card.Body>
+            </Card>
+          </Col>
+
         </Row>
       </Container>
     </div>
