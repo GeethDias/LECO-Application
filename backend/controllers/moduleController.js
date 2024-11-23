@@ -47,4 +47,24 @@ const getModulesByTitle = async (req, res) => {
     }
 };
 
-module.exports = { createModule, getModules, getModulesByTitle }
+
+const deleteModules = async (req, res) => {
+    const { id } = req.params; // Extract the module ID from request parameters
+
+    try {
+        // Find and delete the module by its ID
+        const deletedModule = await Module.findByIdAndDelete(id);
+
+        if (!deletedModule) {
+            return res.status(404).json({ message: 'Module not found' });
+        }
+
+        res.status(200).json({ message: 'Module deleted successfully', module: deletedModule });
+    } catch (error) {
+        console.error('Error deleting module:', error);
+        res.status(500).json({ message: 'An error occurred while deleting the module' });
+    }
+};
+
+
+module.exports = { createModule, getModules, getModulesByTitle, deleteModules }

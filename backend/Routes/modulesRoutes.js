@@ -1,7 +1,7 @@
 const express = require('express')
 const multer = require('multer');
 const path = require('path');
-const { createModule, getModules, getModulesByTitle } = require('../controllers/moduleController')
+const { createModule, getModules, getModulesByTitle, deleteModules } = require('../controllers/moduleController')
 const { protect, adminOnly } = require('../Middleware/authMiddleware');
 
 const router = express.Router()
@@ -27,6 +27,7 @@ const upload = multer({ storage: storage });
 
 router.post('/upload-module', protect, adminOnly, upload.fields([{ name: 'video' }, { name: 'image' }]), createModule)
 router.get('/', protect, getModules)
-router.get('/module-content', getModulesByTitle)
+router.get('/module-content', protect, getModulesByTitle)
+router.delete('/:id', protect, adminOnly, deleteModules)
 
 module.exports = router;

@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Editor } from '@tinymce/tinymce-react';
-import { Container, Row, Col, Form, Button, Card } from 'react-bootstrap';
+import { Container, Row, Col, Form, Button, Card, Table } from 'react-bootstrap';
 
 const AddModules = () => {
     const [title, setTitle] = useState('');
@@ -10,6 +10,26 @@ const AddModules = () => {
     const [editorContent, setEditorContent] = useState('');
     const [image, setImage] = useState(null);
     const [video, setVideo] = useState(null);
+    const [modules, setModules] = useState([]);
+
+
+    // Fetch all modules
+    useEffect(() => {
+        const fetchModules = async () => {
+            try {
+                const token = localStorage.getItem('token');
+                const response = await axios.get('http://localhost:4000/api/modules', {
+                    headers: {
+                        'Authorization': `Bearer ${token}` // Include the Authorization header
+                    }
+                })
+                setModules(response.data);
+            } catch (error) {
+                console.error('Error fetching modules:', error);
+            }
+        };
+        fetchModules();
+    }, [modules]);
 
     const handleUploadModule = async () => {
         const formData = new FormData();
@@ -28,9 +48,26 @@ const AddModules = () => {
                 },
             });
             alert('Module uploaded successfully!');
+            setModules([...modules, response.data]);
         } catch (error) {
             console.error('Upload error:', error);
             alert('Module upload failed.');
+        }
+    };
+
+    // Handle module deletion
+    const handleDeleteModule = async (id) => {
+        try {
+            await axios.delete(`http://localhost:4000/api/modules/${id}`, {
+                headers: {
+                    'Authorization': `Bearer ${localStorage.getItem('token')}`
+                },
+            });
+            alert('Module deleted successfully!');
+            setModules(modules.filter(module => module.id !== id)); // Update state after deletion
+        } catch (error) {
+            console.error('Error deleting module:', error);
+            alert('Failed to delete module.');
         }
     };
 
@@ -114,6 +151,42 @@ const AddModules = () => {
                             Upload Module
                         </Button>
                     </Form>
+                </Card.Body>
+            </Card>
+
+            <Card className="shadow-sm">
+                <Card.Body>
+                    <h2 className="mb-4">Modules List</h2>
+                    <Table striped bordered hover>
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Title</th>
+                                <th>Description</th>
+                                <th>Department</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {modules.map((module, index) => (
+                                <tr key={module._id}>
+                                    <td>{index + 1}</td>
+                                    <td>{module.title}</td>
+                                    <td>{module.description}</td>
+                                    <td>{module.department}</td>
+                                    <td>
+                                        <Button
+                                            variant="danger"
+                                            size="sm"
+                                            onClick={() => handleDeleteModule(module._id)}
+                                        >
+                                            Delete
+                                        </Button>
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </Table>
                 </Card.Body>
             </Card>
         </Container>
