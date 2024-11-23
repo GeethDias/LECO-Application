@@ -4,13 +4,13 @@ import { Link } from 'react-router-dom'; // Import Link from react-router-dom
 import './LoginForm.css'; // Add CSS for better styling
 
 const Login = () => {
-    const [email, setEmail] = useState('');
+    const [employmentId, setEmploymentId] = useState('');
     const [password, setPassword] = useState('');
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post('/api/auth/login', { email, password });
+            const response = await axios.post('/api/auth/login', { employmentId, password });
             const { token, role, userid } = response.data;
             localStorage.setItem('token', token);
             localStorage.setItem('role', role);
@@ -32,11 +32,11 @@ const Login = () => {
                 <h2>Login</h2>
                 <form onSubmit={handleSubmit} className="login-form">
                     <div className="form-group">
-                        <label>Email:</label>
+                        <label>Employee Id:</label>
                         <input
-                            type="email"
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
+                            type="text"
+                            value={employmentId}
+                            onChange={(e) => setEmploymentId(e.target.value)}
                             required
                         />
                     </div>

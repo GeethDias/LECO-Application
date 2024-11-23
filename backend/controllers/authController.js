@@ -36,10 +36,10 @@ const registerUser = async (req, res) => {
 
 //to login the user
 const loginUser = async (req, res) => {
-    const { email, password } = req.body;
+    const { employmentId, password } = req.body;
 
     // Check if user exists
-    const user = await User.findOne({ email });
+    const user = await User.findOne({ employmentId });
     if (!user) return res.status(400).json({ error: 'Invalid credentials' });
 
     // Check if user is locked

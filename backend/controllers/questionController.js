@@ -4,19 +4,29 @@ const mongoose = require('mongoose')
 
 // get all questions
 const getQuestions = async (req, res) => {
+    const { moduleId } = req.query;
+    console.log("moduleId: ", moduleId);
 
-    const {moduleId } = req.query
-    console.log("moduleId: ", moduleId)
-    try {
-        
-        const questions = await Question.find({ moduleId: moduleId });
-        console.log("questions: ", questions)
-        res.status(200).json(questions)
-        
-    } catch (error) {
-        res.status(400).json({ error: error.message })
+    if (!moduleId) {
+        return res.status(400).json({ error: "Module ID is required" });
     }
-}
+
+    try {
+        // Fetch questions and populate the related module details
+        const questions = await Question.find({ moduleId }).populate('moduleId');
+        
+
+        if (questions.length === 0) {
+            return res.status(404).json({ error: "No questions found for this module" });
+        }
+
+        res.status(200).json(questions);
+    } catch (error) {
+        console.error("Error fetching questions: ", error.message);
+        res.status(500).json({ error: "Server error" });
+    }
+};
+
 
 
 // get a single question
@@ -41,7 +51,7 @@ const getQuestion = async (req, res) => {
 // create a new question
 const createquestion = async (req, res) => {
     const { moduleId, questionText, options, correctAnswer} = req.body
-    console.log("Question to Add", req.body)
+    
     // add document to database
     try {
         const question = await Question.create({  moduleId, questionText, options, correctAnswer }) // moduleId, questionText, options, correctAnswer create a new document in MongoDB

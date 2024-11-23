@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Container, Form, Row, Col, Button, Card } from 'react-bootstrap';
 
 const AddQuestion = () => {
+    const [modules, setModules] = useState([]); 
     const [moduleId, setModuleId] = useState('');
     const [questionText, setQuestionText] = useState('');
     const [numOptions, setNumOptions] = useState(2);  // Default to 2 options
@@ -9,23 +10,18 @@ const AddQuestion = () => {
     const [correctAnswer, setCorrectAnswer] = useState('');
     const [questions, setQuestions] = useState([]);  // For storing fetched questions
 
-    // Available module IDs for the dropdown
-    const moduleIds = [
-        'PasswordModule',
-        'BYODPolicyModule',
-        'RemoteAccessModule',
-        'InternetUsageModule',
-        "SecureSoftwareModule",
-        "DataHandlingAndStorageModule",
-        "AccessControlIdentityManagement",
-        "PersonalDataSecurityModule",
-        "SecureOnlinePaymentsModule",
-        "ITDepartmentInitialQuiz",
-        "HRDepartmentInitialQuiz",
-        "FinanceInitialQuiz"
-    ];
+    useEffect(() => {
+        fetch('/api/modules', {
+            headers: {
+                'Authorization': `Bearer ${localStorage.getItem('token')}`,
+            },
+        })
+        .then(response => response.json())
+        .then(data => setModules(data))
+        .catch(error => console.error('Error fetching modules:', error));
+    }, []);
 
-    // Fetch questions from backend when a module is selected
+        // Fetch questions from backend when a module is selected
     useEffect(() => {
         if (moduleId) {
             fetch(`/api/questions?moduleId=${moduleId}`, {
@@ -119,8 +115,8 @@ const AddQuestion = () => {
                         <Col sm={10}>
                             <Form.Select value={moduleId} onChange={(e) => setModuleId(e.target.value)} required>
                                 <option value="">Select Module</option>
-                                {moduleIds.map(id => (
-                                    <option key={id} value={id}>{id}</option>
+                                {modules.map(module => (
+                                    <option key={module._id} value={module._id}>{module.title}</option>
                                 ))}
                             </Form.Select>
                         </Col>

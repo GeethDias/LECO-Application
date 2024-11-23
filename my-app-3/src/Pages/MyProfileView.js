@@ -57,7 +57,7 @@ const MyProfile = ({ user }) => {
                 {userMarks.map((mark, index) => (
                     <div key={index} className="marks-item">
                         <div className="marks-module">
-                            <strong>Module:</strong> {mark.moduleName}
+                            <strong>Module:</strong> {mark.moduleId.title}
                         </div>
                         <div className="marks-comparison">
                             <div className="marks-previous">

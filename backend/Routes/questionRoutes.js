@@ -1,4 +1,3 @@
-// Add this line at the top to import protect middleware
 const { protect, adminOnly } = require('../Middleware/authMiddleware');
 
 const express = require('express')
