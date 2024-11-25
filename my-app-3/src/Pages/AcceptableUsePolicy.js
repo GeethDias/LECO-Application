@@ -24,7 +24,6 @@ const AcceptableUsePolicy = () => {
     if (!token) {
       console.error('No token found, user might not be authenticated.');
       setLoading(false);
-      return;
     }
 
     axios.get(`${API_BASE_URL}/api/policy`, {

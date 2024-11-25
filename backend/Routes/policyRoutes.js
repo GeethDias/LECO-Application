@@ -6,7 +6,7 @@ const { getPolicy, updatePolicy } = require('../controllers/policyController');
 const router = express.Router()
 
 
-router.get('/', protect, getPolicy)
+router.get('/', getPolicy)
 router.put('/', protect, adminOnly, updatePolicy)
 
 
