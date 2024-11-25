@@ -12,9 +12,15 @@ const AcceptableUsePolicy = () => {
   const [policyContent, setPolicyContent] = useState('');
   const [isEditing, setIsEditing] = useState(location.state?.isEditing ?? false);
   const [loading, setLoading] = useState(true);
+  const [isAdmin, setIsAdmin] = useState(false);
 
   useEffect(() => {
-    if (location.state?.isEditing) {
+    // Check if the user has an admin role
+    const role = localStorage.getItem('role');
+    setIsAdmin(role === 'AdminUser');
+
+    // Set editing state from location state
+    if (location.state?.isEditing && role === 'AdminUser') {
       setIsEditing(location.state.isEditing);
     }
   }, [location]);
@@ -76,7 +82,7 @@ const AcceptableUsePolicy = () => {
       <Row className="justify-content-center">
         <Col md={8}>
           <Card className="p-4">
-            {isEditing ? (
+            {isAdmin && isEditing ? (
               <div>
                 <Editor
                   apiKey="tl1xjxw21xryk7hzkkvjy1uu7ceb34s37chqjdsj902bj7ks"
@@ -97,7 +103,7 @@ const AcceptableUsePolicy = () => {
             ) : (
               <div>
                 <div dangerouslySetInnerHTML={{ __html: policyContent }} />
-                <button className="btn btn-primary mt-3" onClick={() => setIsEditing(true)}>Edit Policy</button>
+                {isAdmin && <button className="btn btn-primary mt-3" onClick={() => setIsEditing(true)}>Edit Policy</button>}
               </div>
             )}
           </Card>
